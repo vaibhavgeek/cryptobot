@@ -40,6 +40,9 @@ def get_binance_values():
 	client = Client(api_key, api_secret)
 	price = client.get_symbol_ticker(symbol="LTCUSDT")
 	now = time.time()
+
+	p_action = db.trans.find().sort('$natural', pymongo.DESCENDING).limit(-1).next()
+	pac = p_action["action"]
 	#db.prices.insert({"coin": price['symbol'], "price": price['price'] , "whattodo": "buy"})
 	previous = db.prices.find().sort('$natural', pymongo.DESCENDING).limit(-1).next()
 	p2 = price['price']
@@ -55,10 +58,10 @@ def get_binance_values():
 
 	if p_sign == slope_sign:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "not"})
-	elif p_sign == 0 and slope_sign == 1:
+	elif p_sign == 0 and slope_sign == 1 and pac == "sell":
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "buy"})
 		db.trans.insert({"action": "buy", "price": price['price'] , "time": now })
-	elif p_sign == 1 and slope_sign == 0:
+	elif p_sign == 1 and slope_sign == 0 and pac == "buy":
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "sell"})
 		db.trans.insert({"action": "sell", "price": price['price'] , "time": now })
 	
