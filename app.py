@@ -55,16 +55,16 @@ def get_binance_values():
 
 	if p_sign == slope_sign:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "not"})
-	if p_sign == 0 and slope_sign == 1:
+	elif p_sign == 0 and slope_sign == 1:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "buy"})
 		db.trans.insert({"action": "buy", "price": price['price'] , "time": now })
-	if p_sign == 1 and slope_sign == 0:
+	elif p_sign == 1 and slope_sign == 0:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "sell"})
 		db.trans.insert({"action": "sell", "price": price['price'] , "time": now })
 	
 	#db.profits.update({"_id": pro["_id"]}, {
     #                           "$set": {"profits":prof }})
-	
+
 
 # place a test market buy order, to place an actual order use the create_order function
 	
