@@ -28,6 +28,7 @@ api_secret = "jQkycwqwX0IBSMdPjMwpyeIp9OOFlxJfeUDIH8OvvLr33q9sGi5bgsMX2OWpb47k"
 client = Client(api_key, api_secret)
 price = client.get_symbol_ticker(symbol="LTCUSDT")
 now = time.time()
+db.trans.insert({ "action": "buy" , "price": price['price'] , "time": now})
 db.prices.insert({"coin": price['symbol'], "price": price['price'] , "slope": 0 , "time": now , "slope_sign": 1  , "whattodo": "buy"})
 #db.profits.insert({"profits": profit})
 
