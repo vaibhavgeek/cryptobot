@@ -56,7 +56,7 @@ def get_binance_values():
 	slope_sign = 1 if slope >= 0 else 0
 
 	#pro = db.profits.find().sort('$natural', pymongo.DESCENDING).limit(-1).next()
-
+	print(price['price'])
 	if p_sign == slope_sign:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "not"})
 	elif p_sign == 0 and slope_sign == 1 and pac == "sell" and price['price'] < p_action['price']:
