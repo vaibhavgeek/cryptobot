@@ -59,7 +59,7 @@ def get_binance_values():
 
 	if p_sign == slope_sign:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "not"})
-	elif p_sign == 0 and slope_sign == 1 and pac == "sell":
+	elif p_sign == 0 and slope_sign == 1 and pac == "sell" and price['price'] < p_action['price']:
 		db.prices.insert({"coin": price['symbol'], "price": price['price'] , "time": now , "slope": slope , "slope_sign": slope_sign , "whattodo": "buy"})
 		db.trans.insert({"action": "buy", "price": price['price'] , "time": now })
 	elif p_sign == 1 and slope_sign == 0 and pac == "buy" and price['price'] > p_action['price']:
