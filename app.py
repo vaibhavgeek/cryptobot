@@ -18,12 +18,12 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 from binance.client import Client
 
-CONNECTION="mongodb://chaturbots:F1inindia@ds125198.mlab.com:25198/cryptobot"
+CONNECTION="MONGODB"
 client = MongoClient(CONNECTION)
 db = client.cryptobot
 
-api_key = "RQTH6gzgaHTGpTherAiK8Ids28y6J1LXb7DhnDaQSEupgEDAHEcKDlAzFgRlzdBW"
-api_secret = "jQkycwqwX0IBSMdPjMwpyeIp9OOFlxJfeUDIH8OvvLr33q9sGi5bgsMX2OWpb47k"
+api_key = "binance_api_key"
+api_secret = "binance_api_secret"
 #profit = 0
 client = Client(api_key, api_secret)
 price = client.get_symbol_ticker(symbol="LTCUSDT")
